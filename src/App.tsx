@@ -7,7 +7,10 @@ import { AllNotes, Formulas, Home, QuestionPage } from './pages';
 
 function ScrollTop() {
   const { pathname } = useLocation();
-  useEffect(() => window.scrollTo(0, 0), [pathname]);
+  useEffect(() => {
+    // Braces matter: newer Chromium returns a Promise from scrollTo, which React would treat as a cleanup function.
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return null;
 }
 

@@ -5,7 +5,9 @@ import { breakEven, centerOfGravity, cplEvaluate, cplOptimum, factorRating, grav
 
 function useStored<T>(key: string, init: T): [T, (v: T) => void] {
   const [v, setV] = useState<T>(() => load(key, init));
-  useEffect(() => save(key, v), [key, v]);
+  useEffect(() => {
+    save(key, v);
+  }, [key, v]);
   return [v, setV];
 }
 

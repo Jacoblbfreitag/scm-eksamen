@@ -183,7 +183,9 @@ export function ValueDensity() {
 export function CostBreakdown() {
   const KEYS = ['Produktion', 'Inbound-transport (fabrik → DW)', 'Outbound-transport (DW → marked)', 'DW / lager', 'Andet'];
   const [v, setV] = useState<number[]>(() => load('faulks-costs', [0, 0, 0, 0, 0]));
-  useEffect(() => save('faulks-costs', v), [v]);
+  useEffect(() => {
+    save('faulks-costs', v);
+  }, [v]);
   const total = v.reduce((a, b) => a + b, 0);
   const order = KEYS.map((k, i) => ({ k, x: v[i] })).sort((a, b) => b.x - a.x);
   const TIPS: Record<string, string> = {
